@@ -11,7 +11,7 @@ class FalloutHelper
   
   def map_words
     self.words.each do |word|
-      #what
+      
     end
   end
   

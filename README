@@ -1,4 +1,6 @@
 This project is here to make the fallout terminal hacking trivial.
 
-Currently the autotest is now working.  To get it started run "rake spec:autotest"
+To streamline testing with fallout you can now use autospec to always run your tests.
+
+just run autospec from the base directory of the project.
 
