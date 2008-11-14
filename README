@@ -1,1 +1,4 @@
-This project is here to make the fallout tests trivial.
+This project is here to make the fallout terminal hacking trivial.
+
+Currently the autotest is now working.  To get it started run "rake spec:autotest"
+
