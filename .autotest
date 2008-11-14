@@ -1,6 +1,10 @@
 Autotest.add_hook :initialize do |at|
   at.clear_mappings()
+  at.find_directories = ["spec/", "lib/"]
   at.add_mapping(%r%^lib/.*\.rb$%) {
+    at.files_matching %r%^spec/.*_spec\.rb$%
+  }
+  at.add_mapping(%r%^spec/.*_spec\.rb$%) {
     at.files_matching %r%^spec/.*_spec\.rb$%
   }
 end
