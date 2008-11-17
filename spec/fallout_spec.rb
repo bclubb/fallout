@@ -6,20 +6,21 @@ describe FalloutHelper, "When one word is added to the helper" do
   
   before do
     @fallout = FalloutHelper.new 
-    @fallout.add_word('hello', nil)
+    @fallout.add_word('hello')
   end
   
   it "should have the word that was added to it" do
-    literal_words = @fallout.words.map do |word| word.word end
-    literal_words.should include('hello')
+    @fallout.profiles.keys.should include('hello')
   end
   
-  it "sh ould have one word in it" do
-    @fallout.words.length.should == 1
+  it "should have one word in it" do
+    @fallout.profiles.length.should == 1
   end
   
-  it "should be initialized with nil for matches" do
-    @fallout.words.each do |word| word.matches.should be_nil end
+  it "should be initialized with an empty hash for for matches" do
+    @fallout.profiles.values.each do |match| 
+      match.should == {}
+    end
   end
 
 end
@@ -27,34 +28,47 @@ end
 describe FalloutHelper, "When multiple words are added to the helper" do
   
   before do
-    @fallout = FalloutHelper.new [Guess.new('IMPORTANT',nil), Guess.new('ACCORDING',nil), Guess.new('OCCUPYING',nil), Guess.new('LOCATIONS',nil), 
-                                  Guess.new('GUARDIANS',nil), Guess.new('RESILIENT',nil), Guess.new('RECYCLING',nil), Guess.new('RELEASING',nil), 
-                                  Guess.new('RETURNING',nil), Guess.new('INSISTENT',nil), Guess.new('REGARDING',nil), Guess.new('REMINDING',nil), 
-                                  Guess.new('THREATENS',nil), Guess.new('REQUIRING',nil), Guess.new('REPAIRING',nil), Guess.new('OCCASIONS',nil), 
-                                  Guess.new('ACCEPTING',nil), Guess.new('NECESSARY',nil), Guess.new('DEFEATING',nil), Guess.new('LEUTENANT',nil)]
-
+    @fallout = FalloutHelper.new ['IMPORTANT', 'ACCORDING', 'OCCUPYING', 'LOCATIONS', 
+                                  'GUARDIANS', 'RESILIENT', 'RECYCLING', 'RELEASING', 
+                                  'RETURNING', 'INSISTENT', 'REGARDING', 'REMINDING', 
+                                  'THREATENS', 'REQUIRING', 'REPAIRING', 'OCCASIONS', 
+                                  'ACCEPTING', 'NECESSARY', 'DEFEATING', 'LEUTENANT']
+    @fallout.guessed_word 'ACCEPTING', 3
+    @fallout.guessed_word 'NECESSARY', 1
+    puts @fallout.possible_words
   end
   
   it "should have multiple items in the helper" do
-    @fallout.words.length.should == 20
+    @fallout.profiles.length.should == 20
   end
 
-  it "should have all items initialized with nil matches" do
-    @fallout.words.each { |word| word.matches.should be_nil }
+  it "should have all items initialized with 19 matches profiled" do
+    @fallout.profiles.values.each { |profile| profile.length.should == 19 }
   end
-
+  
+  
 end
 
 describe FalloutHelper, "When a word has been guessed with matches" do
   
   before do
-    @fallout = FalloutHelper.new [Guess.new('layer', nil), Guess.new('layac', ''), Guess.new('yards', nil)]
+    @fallout = FalloutHelper.new ['layer', 'layac', 'yards']
     @fallout.guessed_word 'layer', 3
   end
   
-  it "should be able to return possible choices " do
-    @fallout.possible_words.length.should == 3
-    #@fallout.possible_words.should include('layac')
+  it "should be able to return possible choices" do
+    @fallout.possible_words.length.should == 1
+    @fallout.possible_words.should include('layac')
   end
   
+end
+
+describe FalloutHelper, "When a word is matched against another" do
+  before do
+    @fallout = FalloutHelper.new ['layer', 'layac', 'yards']
+  end
+  
+  it "all identical letters at identical indexes should be matched and counted" do
+    @fallout.match("later", "aseer").should == 2
+  end
 end
