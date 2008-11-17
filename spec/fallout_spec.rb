@@ -35,7 +35,6 @@ describe FalloutHelper, "When multiple words are added to the helper" do
                                   'ACCEPTING', 'NECESSARY', 'DEFEATING', 'LEUTENANT']
     @fallout.guessed_word 'ACCEPTING', 3
     @fallout.guessed_word 'NECESSARY', 1
-    puts @fallout.possible_words
   end
   
   it "should have multiple items in the helper" do

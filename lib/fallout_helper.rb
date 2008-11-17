@@ -36,6 +36,10 @@ class FalloutHelper
   
   def guessed_word(guessed_word, matches)
     @guessed_words.merge!({guessed_word, matches})
+    puts "Guessed Words with matches"
+    @guessed_words.each_pair{|word, matched| puts "#{word}, #{matched}"}
+    puts "possible words:"
+    puts possible_words
   end
   
   def possible_words
