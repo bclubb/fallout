@@ -36,10 +36,6 @@ class FalloutHelper
   
   def guessed_word(guessed_word, matches)
     @guessed_words.merge!({guessed_word, matches})
-    puts "Guessed Words with matches"
-    @guessed_words.each_pair{|word, matched| puts "#{word}, #{matched}"}
-    puts "possible words:"
-    puts possible_words
   end
   
   def possible_words
@@ -60,6 +56,13 @@ class FalloutHelper
       return true if(@profiles[key][word] != value) 
     end
     return false
+  end
+  
+  def report
+    puts "Guessed Words(#{@guessed_words.size}) with matches"
+    @guessed_words.each_pair{|word, matched| puts "#{word}, #{matched}"}
+    puts "Possible Words(#{possible_words.size}):"
+    puts possible_words
   end
   
 end
