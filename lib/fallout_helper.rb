@@ -31,7 +31,14 @@ class FalloutHelper
   end
   
   def add_word word
-    profile_word word, @profiles.collect { |profile| profile.word }
+    update_profiles word
+    profile_word word, @profiles.keys
+  end
+  
+  def update_profiles word
+    @profiles.each_pair do |key, matches|
+      matches.merge!({word, match(key, word)})
+    end
   end
   
   def guessed_word(guessed_word, matches)

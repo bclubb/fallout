@@ -25,7 +25,19 @@ describe FalloutHelper, "When one word is added to the helper" do
 
 end
 
-describe FalloutHelper, "When multiple words are added to the helper" do
+describe "multiple words", :shared => true do
+  
+  it "should have multiple items in the helper" do
+    @fallout.profiles.length.should == 20
+  end
+
+  it "should have all items initialized with 19 matches profiled" do
+    @fallout.profiles.values.each { |profile| profile.length.should == 19 }
+  end
+  
+end
+
+describe FalloutHelper, "When multiple words are added to the helper at initialization" do
   
   before do
     @fallout = FalloutHelper.new ['IMPORTANT', 'ACCORDING', 'OCCUPYING', 'LOCATIONS', 
@@ -39,14 +51,43 @@ describe FalloutHelper, "When multiple words are added to the helper" do
     @fallout.report
   end
   
-  it "should have multiple items in the helper" do
-    @fallout.profiles.length.should == 20
-  end
+  it_should_behave_like "multiple words"
+  
+end
 
-  it "should have all items initialized with 19 matches profiled" do
-    @fallout.profiles.values.each { |profile| profile.length.should == 19 }
+describe FalloutHelper, "When multiple words are added to the helper at initialization" do
+  
+  before do
+    @fallout = FalloutHelper.new
+    @fallout.add_word 'IMPORTANT'
+    @fallout.add_word 'ACCORDING'
+    @fallout.add_word 'OCCUPYING'
+    @fallout.add_word 'LOCATIONS'
+    @fallout.add_word 'GUARDIANS'
+    @fallout.add_word 'RESILIENT'
+    @fallout.add_word 'RECYCLING'
+    @fallout.add_word 'RELEASING'
+    @fallout.add_word 'RETURNING'
+    @fallout.add_word 'INSISTENT'
+    @fallout.add_word 'REGARDING'
+    @fallout.add_word 'REMINDING'
+    @fallout.add_word 'THREATENS'
+    @fallout.add_word 'REQUIRING'
+    @fallout.add_word 'REPAIRING'
+    @fallout.add_word 'OCCASIONS'
+    @fallout.add_word 'ACCEPTING'
+    @fallout.add_word 'NECESSARY'
+    @fallout.add_word 'DEFEATING'
+    @fallout.add_word 'LEUTENANT'
+  
+    
+    @fallout.guessed_word 'ACCEPTING', 3
+    @fallout.report
+    @fallout.guessed_word 'NECESSARY', 1
+    @fallout.report
   end
   
+  it_should_behave_like "multiple words"
   
 end
 
