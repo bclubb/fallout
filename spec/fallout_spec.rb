@@ -46,9 +46,9 @@ describe FalloutHelper, "When multiple words are added to the helper at initiali
                                   'THREATENS', 'REQUIRING', 'REPAIRING', 'OCCASIONS', 
                                   'ACCEPTING', 'NECESSARY', 'DEFEATING', 'LEUTENANT']
     @fallout.guessed_word 'ACCEPTING', 3
-    @fallout.report
+    #@fallout.report
     @fallout.guessed_word 'NECESSARY', 1
-    @fallout.report
+    #@fallout.report
   end
   
   it_should_behave_like "multiple words"
@@ -82,9 +82,9 @@ describe FalloutHelper, "When multiple words are added to the helper at initiali
   
     
     @fallout.guessed_word 'ACCEPTING', 3
-    @fallout.report
+    #@fallout.report
     @fallout.guessed_word 'NECESSARY', 1
-    @fallout.report
+    #@fallout.report
   end
   
   it_should_behave_like "multiple words"
