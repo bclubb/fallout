@@ -4,3 +4,4 @@ To streamline testing with fallout you can now use autospec to always run your t
 
 just run autospec from the base directory of the project.
 
+Updated for runcoderun
